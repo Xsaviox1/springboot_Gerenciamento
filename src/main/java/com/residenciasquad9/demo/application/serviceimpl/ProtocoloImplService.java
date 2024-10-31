@@ -1,6 +1,5 @@
 package com.residenciasquad9.demo.application.serviceimpl;
 
-
 import com.residenciasquad9.demo.domain.dto.ProtocoloDTO;
 import com.residenciasquad9.demo.domain.entites.Protocolo;
 import com.residenciasquad9.demo.domain.repository.ProtocoloRepository;
@@ -15,14 +14,24 @@ public class ProtocoloImplService implements ProtocoloService {
 
     @Autowired
     private ProtocoloRepository protocoloRepository;
+
     @Override
     public Protocolo save(ProtocoloDTO protocoloDTO) {
-        Protocolo protocolo = new Protocolo(protocoloDTO.id()) //Adicionar campos ao dto
+        // Convertendo ProtocoloDTO para Protocolo
+        Protocolo protocolo = new Protocolo();
+        protocolo.setNumeroProtocolo(protocoloDTO.getNumeroProtocolo());
+        protocolo.setDataAbertura(protocoloDTO.getDataAbertura());
+        protocolo.setDataPrazo(protocoloDTO.getDataPrazo());
+        protocolo.setDescricao(protocoloDTO.getDescricao());
+        protocolo.setTipoProtocolo(protocoloDTO.getTipoProtocolo());
+        protocolo.setStatus(protocoloDTO.getStatus());
+
         return protocoloRepository.save(protocolo);
     }
 
     @Override
-    public Optional<Protocolo> findById(int id) {
+    public Optional<Protocolo> findById(Long id) {
         return protocoloRepository.findById(id);
     }
 }
+
