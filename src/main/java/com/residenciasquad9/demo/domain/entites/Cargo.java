@@ -20,3 +20,4 @@ public class Cargo {
     @Column(name = "tipo_cargo", nullable = false)
     private TipoCargo tipoCargo;
 }
+

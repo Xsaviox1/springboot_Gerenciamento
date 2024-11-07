@@ -1,4 +1,3 @@
-// CargoController.java
 package com.residenciasquad9.demo.application.controller;
 
 import com.residenciasquad9.demo.application.serviceimpl.CargoImplService;
@@ -24,7 +23,7 @@ public class CargoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Cargo> getCargoById(@PathVariable int id) {
+    public ResponseEntity<Cargo> getCargoById(@PathVariable Long id) {  // Alterado para Long
         Optional<Cargo> cargo = cargoService.findById(id);
         return cargo.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
@@ -41,7 +40,7 @@ public class CargoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Cargo> updateCargo(@PathVariable int id, @RequestBody CargoDTO cargoDTO) {
+    public ResponseEntity<Cargo> updateCargo(@PathVariable Long id, @RequestBody CargoDTO cargoDTO) {  // Alterado para Long
         try {
             Cargo updatedCargo = cargoService.update(id, cargoDTO);
             return ResponseEntity.ok(updatedCargo);
@@ -51,7 +50,7 @@ public class CargoController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteCargo(@PathVariable int id) {
+    public ResponseEntity<Void> deleteCargo(@PathVariable Long id) {  // Alterado para Long
         try {
             cargoService.deleteById(id);
             return ResponseEntity.noContent().build();
@@ -60,3 +59,4 @@ public class CargoController {
         }
     }
 }
+

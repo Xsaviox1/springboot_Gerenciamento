@@ -30,8 +30,7 @@ public class ProtocoloImplService implements ProtocoloService {
     }
 
     @Override
-    public Optional<Protocolo> findById(Long id) {
+    public Optional<Protocolo> findById(String id) {
         return protocoloRepository.findById(id);
     }
 }
-

@@ -7,6 +7,7 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public record CargoDTO() {
-    private static TipoCargo TipoCargo;
+public class CargoDTO {
+    private TipoCargo tipoCargo;
 }
+

@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface ProtocoloService {
     Protocolo save(ProtocoloDTO protocolo);
-    Optional<Protocolo> findById(Long id);
+    Optional<Protocolo> findById(String id);
 }
 
 

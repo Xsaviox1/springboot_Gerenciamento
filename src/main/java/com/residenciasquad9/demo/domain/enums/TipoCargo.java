@@ -1,5 +1,6 @@
 package com.residenciasquad9.demo.domain.enums;
 
 public enum TipoCargo {
-    OPERADOR_DE_ATENDIMENTO, GERENTE, ANALISTA
+    operador_de_atendimento, gerente,analista
 }
+
