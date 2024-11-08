@@ -8,5 +8,5 @@ import java.util.Optional;
 public interface CargoService {
     Cargo save(CargoDTO cargo);
 
-    Optional<Cargo> findById(int id);
+    Optional<Cargo> findById(Long id);  // Alterado para Long
 }

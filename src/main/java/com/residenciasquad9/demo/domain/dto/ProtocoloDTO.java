@@ -1,6 +1,5 @@
 package com.residenciasquad9.demo.domain.dto;
 
-import com.residenciasquad9.demo.domain.entites.Protocolo;
 import com.residenciasquad9.demo.domain.enums.Status;
 import com.residenciasquad9.demo.domain.enums.TipoProtocolo;
 import lombok.*;
@@ -13,11 +12,10 @@ import java.util.Date;
 @AllArgsConstructor
 public class ProtocoloDTO {
 
-    private Long NumeroProtocolo;
-    private Date DataAbertura;
-    private Date DataPrazo;
-    private String Descricao;
-    private TipoProtocolo TipoProtocolo;
-    private Status Status;
+    private Long numeroProtocolo;
+    private Date dataAbertura;
+    private Date dataPrazo;
+    private String descricao;
+    private TipoProtocolo tipoProtocolo;
+    private Status status;
 }
-
