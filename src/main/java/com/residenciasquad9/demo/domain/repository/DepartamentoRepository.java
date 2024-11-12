@@ -1,4 +1,4 @@
-package domain.repository;
+package com.residenciasquad9.demo.domain.repository;
 
 import com.residenciasquad9.demo.domain.entities.Departamento;
 import org.springframework.data.jpa.repository.JpaRepository;

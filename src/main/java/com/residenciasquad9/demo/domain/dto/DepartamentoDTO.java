@@ -1,4 +1,4 @@
-package domain.dto;
+package com.residenciasquad9.demo.domain.dto;
 
 import com.residenciasquad9.demo.domain.enums.TipoDepartamento;
 import lombok.*;
