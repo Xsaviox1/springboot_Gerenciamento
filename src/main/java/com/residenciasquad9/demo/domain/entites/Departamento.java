@@ -1,12 +1,10 @@
-package domain.entites;
+package com.residenciasquad9.demo.domain.entites;
 
 import com.residenciasquad9.demo.domain.enums.TipoDepartamento;
 import jakarta.persistence.*;
 import lombok.*;
 
 @Data
-@Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -28,3 +26,4 @@ public class Departamento {
     @Column(name = "tipo_departamento", nullable = false)
     private TipoDepartamento tipoDepartamento;
 }
+

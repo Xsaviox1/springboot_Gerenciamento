@@ -1,7 +1,5 @@
-package domain.enums;
+package com.residenciasquad9.demo.domain.enums;
 
 public enum TipoDepartamento {
-    Departamento1,
-    Departamento2,
-    Departamento3,
+    DEPARTAMENTO1, DEPARTAMENTO2, DEPARTAMENTO3
 }

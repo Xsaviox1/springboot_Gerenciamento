@@ -1,4 +1,4 @@
-package domain.service;
+package com.residenciasquad9.demo.domain.service;
 
 import com.residenciasquad9.demo.domain.dto.DepartamentoDTO;
 import com.residenciasquad9.demo.domain.entities.Departamento;
@@ -18,3 +18,4 @@ public interface DepartamentoService {
 
     void deleteById(Long id);
 }
+
