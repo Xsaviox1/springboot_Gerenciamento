@@ -24,9 +24,14 @@ public enum TipoProtocolo {
 
     // Método para calcular o prazo com base na data de abertura
     public Date calcularPrazo(Date dataAbertura) {
+        if (dataAbertura == null) {
+            throw new IllegalArgumentException("A data de abertura não pode ser nula.");
+        }
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(dataAbertura);
-        calendar.add(Calendar.DAY_OF_MONTH, this.diasDePrazo); // Adiciona os dias de prazo
+        calendar.add(Calendar.DAY_OF_MONTH, this.diasDePrazo);
         return calendar.getTime();
     }
 }
+
+

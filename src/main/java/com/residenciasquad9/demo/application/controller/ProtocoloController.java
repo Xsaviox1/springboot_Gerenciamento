@@ -40,16 +40,17 @@ public class ProtocoloController {
     }
 
     @PutMapping("/{id}/status")
-    public ResponseEntity<Protocolo> atualizarStatusProtocolo(@PathVariable String id, @RequestParam Status novoStatus) {
-        Protocolo protocoloAtualizado = protocoloService.atualizarStatusProtocolo(id, novoStatus);
-        return ResponseEntity.ok(protocoloAtualizado);
+    public ResponseEntity<Protocolo> atualizarStatus(@PathVariable String id, @RequestBody Status status) {
+        Protocolo protocolo = protocoloService.atualizarStatusProtocolo(id, status);
+        return ResponseEntity.ok(protocolo);
     }
 
     @GetMapping("/{id}/historico")
-    public ResponseEntity<List<String>> consultarHistoricoProtocolo(@PathVariable String id) {
+    public ResponseEntity<List<String>> consultarHistorico(@PathVariable String id) {
         List<String> historico = protocoloService.consultarHistoricoProtocolo(id);
         return ResponseEntity.ok(historico);
     }
 }
+
 
 
