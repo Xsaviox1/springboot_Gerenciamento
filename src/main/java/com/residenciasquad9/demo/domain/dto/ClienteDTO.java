@@ -1,6 +1,7 @@
 package com.residenciasquad9.demo.domain.dto;
 
 import com.residenciasquad9.demo.domain.enums.TipoCliente;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Getter
@@ -11,7 +12,8 @@ public class ClienteDTO {
     private String nome;
     private String cpf;
     private String email;
-    private TipoCliente tipoCliente;  // Alterado para usar o enum
+    private TipoCliente tipoCliente;
     private String cnpj;
     private Long telefoneIdTelefone;
 }
+

@@ -20,7 +20,6 @@ public interface ProtocoloService {
     Optional<Protocolo> findById(String id);
     Protocolo criarStatusProtocolo(String id, Status status);
 
-    // Deixe o método 'calcularPrazo' público aqui na interface
     public Date calcularPrazo(TipoProtocolo tipoProtocolo, Date dataAbertura);
 }
 

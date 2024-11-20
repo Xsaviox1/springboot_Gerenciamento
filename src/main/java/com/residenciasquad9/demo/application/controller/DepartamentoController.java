@@ -1,7 +1,7 @@
 package com.residenciasquad9.demo.application.controller;
 
 import com.residenciasquad9.demo.domain.dto.DepartamentoDTO;
-import com.residenciasquad9.demo.domain.entities.Departamento;
+import com.residenciasquad9.demo.domain.entites.Departamento;
 import com.residenciasquad9.demo.domain.service.DepartamentoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
