@@ -8,7 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "Cliente")
+@Table(name = "clientes")  // Ajuste na tabela, seguindo a convenção plural
 public class Cliente {
 
     @Id
@@ -27,7 +27,7 @@ public class Cliente {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "tipo_cliente", nullable = false)
-    private TipoCliente tipoCliente; // Alterado para usar o enum
+    private TipoCliente tipoCliente;
 
     @Column(name = "cnpj", unique = true)
     private String cnpj;

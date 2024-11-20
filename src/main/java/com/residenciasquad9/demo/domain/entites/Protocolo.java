@@ -39,9 +39,11 @@ public class Protocolo {
         @Column(name = "status", nullable = false)
         private Status status;
 
+        // Relacionamento com Cliente (Titular ou Anônimo)
         @ManyToOne
         @JoinColumn(name = "cliente_id_cliente", referencedColumnName = "id_cliente")
         private Cliente cliente;
 }
+
 
 
