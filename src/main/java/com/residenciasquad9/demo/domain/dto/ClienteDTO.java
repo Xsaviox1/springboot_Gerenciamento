@@ -1,7 +1,6 @@
 package com.residenciasquad9.demo.domain.dto;
 
 import com.residenciasquad9.demo.domain.enums.TipoCliente;
-import jakarta.persistence.*;
 import lombok.*;
 
 @Getter
@@ -16,4 +15,3 @@ public class ClienteDTO {
     private String cnpj;
     private Long telefoneIdTelefone;
 }
-

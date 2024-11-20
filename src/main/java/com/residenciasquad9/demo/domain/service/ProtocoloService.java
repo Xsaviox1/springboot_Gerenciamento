@@ -10,17 +10,23 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ProtocoloService {
+
     Protocolo abrirProtocolo(ProtocoloDTO protocoloDTO);
+
     Optional<Date> consultarDataProtocolo(String id);
 
     Protocolo atualizarTipoProtocolo(String id, TipoProtocolo novoTipo);
+
     Protocolo atualizarStatusProtocolo(String id, Status novoStatus);
+
     List<String> consultarHistoricoProtocolo(String id);
+
     Protocolo save(ProtocoloDTO protocoloDTO);
+
     Optional<Protocolo> findById(String id);
+
     Protocolo criarStatusProtocolo(String id, Status status);
 
-    public Date calcularPrazo(TipoProtocolo tipoProtocolo, Date dataAbertura);
+    Date calcularPrazo(TipoProtocolo tipoProtocolo, Date dataAbertura);
 }
-
 

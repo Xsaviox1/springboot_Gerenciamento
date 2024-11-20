@@ -4,20 +4,16 @@ import com.residenciasquad9.demo.domain.enums.Status;
 import com.residenciasquad9.demo.domain.enums.TipoProtocolo;
 import jakarta.persistence.*;
 import lombok.*;
+
 import java.util.Date;
 
 @Data
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
-@Table(name = "Protocolo") // Nome da tabela no BD
+@Table(name = "Protocolo")
 public class Protocolo {
 
-        // Atributos
         @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY) // Vai gerar o id automaticamente
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
         @Column(name = "id_protocolo")
         private String idProtocolo;
 
@@ -43,11 +39,11 @@ public class Protocolo {
         @Column(name = "status", nullable = false)
         private Status status;
 
-        // Relacionamento com Cliente
+        // Relacionamento com Cliente (Titular ou Anônimo)
         @ManyToOne
         @JoinColumn(name = "cliente_id_cliente", referencedColumnName = "id_cliente")
         private Cliente cliente;
-
 }
+
 
 
