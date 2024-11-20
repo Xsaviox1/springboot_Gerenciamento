@@ -20,10 +20,10 @@ public class ProtocoloImplService implements ProtocoloService {
     // Abre um novo protocolo com TipoProtocolo
     @Override
     public Protocolo abrirProtocolo(ProtocoloDTO protocoloDTO) {
-        protocoloDTO.setTipoProtocolo(TipoProtocolo.Solicitação);
+        protocoloDTO.setTipoProtocolo(TipoProtocolo.SOLICITAÇÃO);  // Exemplo: define o tipo do protocolo
         protocoloDTO.setStatus(Status.NOVO);
         protocoloDTO.setDataAbertura(new Date());
-        protocoloDTO.setDataPrazo(calcularPrazo(protocoloDTO.getTipoProtocolo(), protocoloDTO.getDataAbertura()));
+        protocoloDTO.setDataPrazo(protocoloDTO.getTipoProtocolo().calcularPrazo(protocoloDTO.getDataAbertura()));
         return protocoloRepository.save(converterDtoParaEntidade(protocoloDTO));
     }
 
@@ -40,7 +40,7 @@ public class ProtocoloImplService implements ProtocoloService {
                 .orElseThrow(() -> new RuntimeException("Protocolo não encontrado"));
 
         protocolo.setTipoProtocolo(novoTipo);
-        protocolo.setDataPrazo(calcularPrazo(novoTipo, protocolo.getDataAbertura()));
+        protocolo.setDataPrazo(novoTipo.calcularPrazo(protocolo.getDataAbertura())); // Chama o método do enum
         return protocoloRepository.save(protocolo);
     }
 
@@ -52,26 +52,6 @@ public class ProtocoloImplService implements ProtocoloService {
 
         protocolo.setStatus(novoStatus);
         return protocoloRepository.save(protocolo);
-    }
-
-    // Método auxiliar para calcular prazo com base no TipoProtocolo
-    @Override
-    public Date calcularPrazo(TipoProtocolo tipoProtocolo, Date dataAbertura) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(dataAbertura);
-
-        switch (tipoProtocolo) {
-            case Reclamação -> calendar.add(Calendar.DAY_OF_MONTH, 5);
-            case Elogio -> calendar.add(Calendar.DAY_OF_MONTH, 10);
-            case Informação -> calendar.add(Calendar.DAY_OF_MONTH, 7);
-            case Solicitação -> calendar.add(Calendar.DAY_OF_MONTH, 7);
-            case Consulta -> calendar.add(Calendar.DAY_OF_MONTH, 7);
-            case Denuncia -> calendar.add(Calendar.DAY_OF_MONTH, 3);
-            case Cancelamento -> calendar.add(Calendar.DAY_OF_MONTH, 2);
-            default -> throw new IllegalArgumentException("Tipo de protocolo inválido");
-        }
-
-        return calendar.getTime();
     }
 
     // Salva o protocolo
@@ -122,5 +102,10 @@ public class ProtocoloImplService implements ProtocoloService {
 
         return historico;
     }
-}
 
+
+    @Override
+    public Date calcularPrazo(TipoProtocolo tipoProtocolo, Date dataAbertura) {
+        return tipoProtocolo.calcularPrazo(dataAbertura); // Delegando a lógica para o enum TipoProtocolo
+    }
+}
