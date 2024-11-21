@@ -1,12 +1,16 @@
 package com.residenciasquad9.demo.domain.dto;
 
 import com.residenciasquad9.demo.domain.enums.TipoCargo;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Getter
-@Setter
-@NoArgsConstructor
+@Data
 @AllArgsConstructor
-public record CargoDTO() {
-    private static TipoCargo TipoCargo;
+@NoArgsConstructor
+public class CargoDTO {
+
+    private Long idCargo;           // ID do cargo
+    private TipoCargo tipoCargo;    // Tipo do cargo (Enum)
 }
+

@@ -1,15 +1,17 @@
-package domain.dto;
+package com.residenciasquad9.demo.domain.dto;
 
 import com.residenciasquad9.demo.domain.enums.TipoDepartamento;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Getter
-@Setter
-@NoArgsConstructor
+@Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class DepartamentoDTO {
 
-    private String nome;
-    private String descricao;
-    private TipoDepartamento tipoDepartamento;
+    private Long idDepartamento;          // ID do departamento
+    private String nome;                  // Nome do departamento
+    private String descricao;             // Descrição do departamento
+    private TipoDepartamento tipoDepartamento;  // Tipo do departamento
 }

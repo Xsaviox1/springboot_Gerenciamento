@@ -1,23 +1,25 @@
 package com.residenciasquad9.demo.domain.dto;
 
-import com.residenciasquad9.demo.domain.entites.Protocolo;
 import com.residenciasquad9.demo.domain.enums.Status;
 import com.residenciasquad9.demo.domain.enums.TipoProtocolo;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
-@Getter
-@Setter
-@NoArgsConstructor
+@Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class ProtocoloDTO {
 
-    private Long NumeroProtocolo;
-    private Date DataAbertura;
-    private Date DataPrazo;
-    private String Descricao;
-    private TipoProtocolo TipoProtocolo;
-    private Status Status;
-}
+    private String idProtocolo;            // ID do protocolo
+    private Long numeroProtocolo;          // Número único do protocolo
+    private Date dataAbertura;             // Data de abertura do protocolo
+    private Date dataPrazo;                // Data do prazo do protocolo
+    private String descricao;              // Descrição do protocolo
+    private TipoProtocolo tipoProtocolo;   // Tipo do protocolo (Enum)
+    private Status status;                 // Status do protocolo (Enum)
+    private Long clienteIdCliente;         // ID do cliente associado ao protocolo
 
+}

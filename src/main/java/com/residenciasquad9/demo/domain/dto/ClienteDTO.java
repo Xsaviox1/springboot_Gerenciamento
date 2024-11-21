@@ -11,7 +11,7 @@ public class ClienteDTO {
     private String nome;
     private String cpf;
     private String email;
-    private TipoCliente tipoCliente;  // Alterado para usar o enum
+    private TipoCliente tipoCliente;
     private String cnpj;
     private Long telefoneIdTelefone;
 }

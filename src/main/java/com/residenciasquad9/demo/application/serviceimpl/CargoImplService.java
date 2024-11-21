@@ -1,4 +1,3 @@
-// CargoImplService.java
 package com.residenciasquad9.demo.application.serviceimpl;
 
 import com.residenciasquad9.demo.domain.dto.CargoDTO;
@@ -22,7 +21,6 @@ public class CargoImplService implements CargoService {
         this.cargoRepository = cargoRepository;
     }
 
-    // Cria ou salva um novo Cargo
     @Override
     public Cargo save(CargoDTO cargoDTO) {
         Cargo cargo = new Cargo();
@@ -30,19 +28,16 @@ public class CargoImplService implements CargoService {
         return cargoRepository.save(cargo);
     }
 
-    // Busca um Cargo pelo ID
     @Override
-    public Optional<Cargo> findById(int id) {
+    public Optional<Cargo> findById(Long id) {  // Alterado para Long
         return cargoRepository.findById(id);
     }
 
-    // Retorna todos os Cargos
     public List<Cargo> findAll() {
         return cargoRepository.findAll();
     }
 
-    // Atualiza um Cargo existente
-    public Cargo update(int id, CargoDTO cargoDTO) {
+    public Cargo update(Long id, CargoDTO cargoDTO) {  // Alterado para Long
         Optional<Cargo> existingCargo = cargoRepository.findById(id);
         if (existingCargo.isPresent()) {
             Cargo cargo = existingCargo.get();
@@ -53,8 +48,7 @@ public class CargoImplService implements CargoService {
         }
     }
 
-    // Exclui um Cargo pelo ID
-    public void deleteById(int id) {
+    public void deleteById(Long id) {  // Alterado para Long
         if (cargoRepository.existsById(id)) {
             cargoRepository.deleteById(id);
         } else {
