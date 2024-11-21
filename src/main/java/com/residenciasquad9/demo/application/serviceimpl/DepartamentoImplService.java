@@ -18,10 +18,14 @@ public class DepartamentoImplService implements DepartamentoService {
 
     @Override
     public Departamento save(DepartamentoDTO departamentoDTO) {
+        if (departamentoRepository.existsByNome(departamentoDTO.getNome())) {
+            throw new RuntimeException("Departamento com o nome '" + departamentoDTO.getNome() + "' já existe");
+        }
         Departamento departamento = new Departamento();
         departamento.setNome(departamentoDTO.getNome());
         departamento.setDescricao(departamentoDTO.getDescricao());
         departamento.setTipoDepartamento(departamentoDTO.getTipoDepartamento());
+
         return departamentoRepository.save(departamento);
     }
 
@@ -37,19 +41,18 @@ public class DepartamentoImplService implements DepartamentoService {
 
     @Override
     public Departamento update(Long id, DepartamentoDTO departamentoDTO) {
-        Optional<Departamento> departamentoOptional = departamentoRepository.findById(id);
-        if (departamentoOptional.isPresent()) {
-            Departamento departamento = departamentoOptional.get();
-            departamento.setNome(departamentoDTO.getNome());
-            departamento.setDescricao(departamentoDTO.getDescricao());
-            departamento.setTipoDepartamento(departamentoDTO.getTipoDepartamento());
-            return departamentoRepository.save(departamento);
-        }
-        return null;
+        Departamento departamento = departamentoRepository.findById(id).orElseThrow(() -> new RuntimeException("Departamento não encontrado"));
+
+        departamento.setNome(departamentoDTO.getNome());
+        departamento.setDescricao(departamentoDTO.getDescricao());
+        departamento.setTipoDepartamento(departamentoDTO.getTipoDepartamento());
+
+        return departamentoRepository.save(departamento);
     }
 
     @Override
     public void deleteById(Long id) {
-        departamentoRepository.deleteById(id);
+        Departamento departamento = departamentoRepository.findById(id).orElseThrow(() -> new RuntimeException("Departamento não encontrado"));
+        departamentoRepository.delete(departamento);
     }
 }

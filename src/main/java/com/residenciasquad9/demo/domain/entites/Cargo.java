@@ -19,5 +19,9 @@ public class Cargo {
     @Enumerated(EnumType.STRING)
     @Column(name = "tipo_cargo", nullable = false)
     private TipoCargo tipoCargo;
-}
 
+    // Relacionamento ManyToOne com Departamento
+    @ManyToOne
+    @JoinColumn(name = "departamento_id", nullable = false)
+    private Departamento departamento;
+}

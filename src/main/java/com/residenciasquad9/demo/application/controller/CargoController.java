@@ -1,62 +1,33 @@
 package com.residenciasquad9.demo.application.controller;
 
-import com.residenciasquad9.demo.application.serviceimpl.CargoImplService;
 import com.residenciasquad9.demo.domain.dto.CargoDTO;
 import com.residenciasquad9.demo.domain.entites.Cargo;
-
+import com.residenciasquad9.demo.domain.service.CargoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/cargo")
+@RequestMapping("/cargos")
 public class CargoController {
 
-    private final CargoImplService cargoService;
-
     @Autowired
-    public CargoController(CargoImplService cargoService) {
-        this.cargoService = cargoService;
+    private CargoService cargoService;
+
+    // Criar Cargo
+    @PostMapping
+    public ResponseEntity<Cargo> criarCargo(@RequestBody CargoDTO cargoDTO) {
+        Cargo cargo = cargoService.save(cargoDTO);
+        return new ResponseEntity<>(cargo, HttpStatus.CREATED);
     }
 
+    // Buscar Cargo por ID
     @GetMapping("/{id}")
-    public ResponseEntity<Cargo> getCargoById(@PathVariable Long id) {  // Alterado para Long
+    public ResponseEntity<Cargo> buscarCargoPorId(@PathVariable Long id) {
         Optional<Cargo> cargo = cargoService.findById(id);
         return cargo.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
-
-    @GetMapping
-    public ResponseEntity<List<Cargo>> getAllCargos() {
-        return ResponseEntity.ok(cargoService.findAll());
-    }
-
-    @PostMapping
-    public ResponseEntity<Cargo> createCargo(@RequestBody CargoDTO cargoDTO) {
-        Cargo cargo = cargoService.save(cargoDTO);
-        return ResponseEntity.ok(cargo);
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<Cargo> updateCargo(@PathVariable Long id, @RequestBody CargoDTO cargoDTO) {  // Alterado para Long
-        try {
-            Cargo updatedCargo = cargoService.update(id, cargoDTO);
-            return ResponseEntity.ok(updatedCargo);
-        } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
-        }
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteCargo(@PathVariable Long id) {  // Alterado para Long
-        try {
-            cargoService.deleteById(id);
-            return ResponseEntity.noContent().build();
-        } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
-        }
-    }
 }
-

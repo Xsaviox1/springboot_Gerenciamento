@@ -3,17 +3,17 @@ package com.residenciasquad9.demo.domain.service;
 import com.residenciasquad9.demo.domain.dto.FuncionarioDTO;
 import com.residenciasquad9.demo.domain.entites.Funcionario;
 
-import java.util.List;
-import java.util.Optional;
-
 public interface FuncionarioService {
-    Funcionario save(FuncionarioDTO funcionarioDTO);
 
-    Optional<Funcionario> findById(int id);
+    // Método para criar um novo funcionário
+    Funcionario criarFuncionario(FuncionarioDTO funcionarioDTO);
 
-    List<Funcionario> findAll();
+    // Método para atribuir um protocolo ao funcionário
+    Funcionario atribuirProtocoloAoFuncionario(String cpf, String protocoloId);
 
-    Funcionario update(int id, FuncionarioDTO funcionarioDTO);
+    // Método para atribuir um cargo ao funcionário
+    Funcionario atribuirCargoAoFuncionario(String cpf, Long cargoId);
 
-    void deleteById(int id);
+    // Método para atribuir um departamento ao funcionário
+    Funcionario atribuirDepartamentoAoFuncionario(String cpf, String departamento);
 }

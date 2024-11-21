@@ -2,68 +2,60 @@ package com.residenciasquad9.demo.application.serviceimpl;
 
 import com.residenciasquad9.demo.domain.dto.FuncionarioDTO;
 import com.residenciasquad9.demo.domain.entites.Funcionario;
+import com.residenciasquad9.demo.domain.entites.Cargo;
+import com.residenciasquad9.demo.domain.entites.Departamento;
 import com.residenciasquad9.demo.domain.repository.FuncionarioRepository;
+import com.residenciasquad9.demo.domain.repository.CargoRepository;
+import com.residenciasquad9.demo.domain.repository.DepartamentoRepository;
 import com.residenciasquad9.demo.domain.service.FuncionarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
-
 @Service
 public class FuncionarioImplService implements FuncionarioService {
 
-    private final FuncionarioRepository funcionarioRepository;
+    @Autowired
+    private FuncionarioRepository funcionarioRepository;
 
     @Autowired
-    public FuncionarioImplService(FuncionarioRepository funcionarioRepository) {
-        this.funcionarioRepository = funcionarioRepository;
-    }
+    private CargoRepository cargoRepository;
+
+    @Autowired
+    private DepartamentoRepository departamentoRepository;
 
     @Override
-    public Funcionario save(FuncionarioDTO funcionarioDTO) {
-        Funcionario funcionario = new Funcionario(
-                funcionarioDTO.getNome(),
-                funcionarioDTO.getEmail(),
-                funcionarioDTO.getCargo(),
-                funcionarioDTO.getDepartamento(),
-                funcionarioDTO.isStatus()
-        );
+    public Funcionario criarFuncionario(FuncionarioDTO funcionarioDTO) {
+        Funcionario funcionario = new Funcionario();
+        funcionario.setCpf(funcionarioDTO.getCpf());
+        funcionario.setNome(funcionarioDTO.getNome());
+        funcionario.setEmail(funcionarioDTO.getEmail());
+        funcionario.setStatusFunc(funcionarioDTO.getStatusFunc());
+
         return funcionarioRepository.save(funcionario);
     }
 
     @Override
-    public Optional<Funcionario> findById(int id) {
-        return funcionarioRepository.findById(id);
+    public Funcionario atribuirProtocoloAoFuncionario(String cpf, String protocoloId) {
+        // Aqui você deve implementar o repositório para o Protocolo, se necessário.
+        Funcionario funcionario = funcionarioRepository.findById(cpf).orElseThrow(() -> new RuntimeException("Funcionario não encontrado"));
+        // Protocolo protocolo = protocoloRepository.findById(protocoloId).orElseThrow(() -> new RuntimeException("Protocolo não encontrado"));
+        // funcionario.setProtocolo(protocolo);
+        return funcionarioRepository.save(funcionario);
     }
 
     @Override
-    public List<Funcionario> findAll() {
-        return funcionarioRepository.findAll();
+    public Funcionario atribuirCargoAoFuncionario(String cpf, Long cargoId) {
+        Funcionario funcionario = funcionarioRepository.findById(cpf).orElseThrow(() -> new RuntimeException("Funcionario não encontrado"));
+        Cargo cargo = cargoRepository.findById(cargoId).orElseThrow(() -> new RuntimeException("Cargo não encontrado"));
+        funcionario.setCargo(cargo);
+        return funcionarioRepository.save(funcionario);
     }
 
     @Override
-    public Funcionario update(int id, FuncionarioDTO funcionarioDTO) {
-        Optional<Funcionario> existingFuncionario = funcionarioRepository.findById(id);
-        if (existingFuncionario.isPresent()) {
-            Funcionario funcionario = existingFuncionario.get();
-            funcionario.setNome(funcionarioDTO.getNome());
-            funcionario.setEmail(funcionarioDTO.getEmail());
-            funcionario.setCargo(funcionarioDTO.getCargo());
-            funcionario.setDepartamento(funcionarioDTO.getDepartamento());
-            funcionario.setStatus(funcionarioDTO.isStatus());
-            return funcionarioRepository.save(funcionario);
-        } else {
-            throw new RuntimeException("Funcionário não encontrado com ID: " + id);
-        }
-    }
-
-    @Override
-    public void deleteById(int id) {
-        if (funcionarioRepository.existsById(id)) {
-            funcionarioRepository.deleteById(id);
-        } else {
-            throw new RuntimeException("Funcionário não encontrado com ID: " + id);
-        }
+    public Funcionario atribuirDepartamentoAoFuncionario(String cpf, String departamento) {
+        Funcionario funcionario = funcionarioRepository.findById(cpf).orElseThrow(() -> new RuntimeException("Funcionario não encontrado"));
+        Departamento departamentoEntity = departamentoRepository.findByNome(departamento).orElseThrow(() -> new RuntimeException("Departamento não encontrado"));
+        funcionario.setDepartamento(departamentoEntity.getNome());
+        return funcionarioRepository.save(funcionario);
     }
 }

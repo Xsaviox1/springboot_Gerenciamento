@@ -10,7 +10,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CargoDTO {
 
-    private Long idCargo;           // ID do cargo
-    private TipoCargo tipoCargo;    // Tipo do cargo (Enum)
+    private Long idCargo;            // ID do cargo
+    private TipoCargo tipoCargo;     // Tipo do cargo (Enum)
+    private Long departamentoId;     // ID do Departamento (relacionamento com Departamento)
 }
 

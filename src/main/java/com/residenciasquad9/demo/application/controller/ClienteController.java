@@ -1,10 +1,9 @@
 package com.residenciasquad9.demo.application.controller;
 
-import com.residenciasquad9.demo.application.serviceimpl.ClienteImplService;
 import com.residenciasquad9.demo.domain.dto.ClienteDTO;
 import com.residenciasquad9.demo.domain.entites.Cliente;
-import com.residenciasquad9.demo.domain.entites.Titular;
-import com.residenciasquad9.demo.domain.service.TitularService;
+import com.residenciasquad9.demo.domain.service.ClienteService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,65 +15,35 @@ import java.util.Optional;
 @RequestMapping("/api/clientes")
 public class ClienteController {
 
-    private final ClienteImplService clienteService;
-    private final TitularService titularService;
-
     @Autowired
-    public ClienteController(ClienteImplService clienteService, TitularService titularService) {
-        this.clienteService = clienteService;
-        this.titularService = titularService;
-    }
+    private ClienteService clienteService;
 
-    // Busca um Cliente pelo ID
-    @GetMapping("/{id}")
-    public ResponseEntity<Cliente> getClienteById(@PathVariable Long id) {
-        Optional<Cliente> cliente = clienteService.findById(id);
-        return cliente.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
-    }
-
-    // Retorna todos os Clientes
-    @GetMapping
-    public ResponseEntity<List<Cliente>> getAllClientes() {
-        List<Cliente> clientes = clienteService.findAll();
-        return ResponseEntity.ok(clientes);
-    }
-
-    // Cria um novo Cliente
     @PostMapping
-    public ResponseEntity<Cliente> createCliente(@RequestBody ClienteDTO clienteDTO) {
+    public ResponseEntity<Cliente> salvarCliente(@RequestBody ClienteDTO clienteDTO) {
         Cliente cliente = clienteService.save(clienteDTO);
         return ResponseEntity.ok(cliente);
     }
 
-    // Atualiza um Cliente existente
+    @GetMapping("/{id}")
+    public ResponseEntity<Cliente> buscarClientePorId(@PathVariable Long id) {
+        Optional<Cliente> clienteOpt = clienteService.findById(id);
+        return clienteOpt.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
     @PutMapping("/{id}")
-    public ResponseEntity<Cliente> updateCliente(@PathVariable Long id, @RequestBody ClienteDTO clienteDTO) {
+    public ResponseEntity<Cliente> atualizarCliente(@PathVariable Long id, @RequestBody ClienteDTO clienteDTO) {
         Cliente cliente = clienteService.update(id, clienteDTO);
-        return ResponseEntity.ok(cliente);
+        return cliente != null ? ResponseEntity.ok(cliente) : ResponseEntity.notFound().build();
     }
 
-    // Exibe informações do Titular do Cliente
-    @GetMapping("/{id}/titular")
-    public ResponseEntity<Titular> getTitularByClienteId(@PathVariable Long id) {
-        Optional<Cliente> cliente = clienteService.findById(id);
-        if (cliente.isPresent() && !clienteService.isAnonimo(cliente.get())) {
-            Optional<Titular> titular = titularService.findByCpf(cliente.get().getCpf());
-            return titular.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    @GetMapping
+    public List<Cliente> listarTodosClientes() {
+        return clienteService.findAll();
     }
 
-    // Exclui um Cliente pelo ID
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteCliente(@PathVariable Long id) {
-        try {
-            clienteService.deleteById(id);
-            return ResponseEntity.noContent().build();
-        } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<Void> deletarCliente(@PathVariable Long id) {
+        clienteService.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 }
-
-

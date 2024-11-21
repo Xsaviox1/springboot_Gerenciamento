@@ -1,85 +1,37 @@
 package com.residenciasquad9.demo.domain.entites;
 
-import com.residenciasquad9.demo.enums.TipoFuncionario;
+import com.residenciasquad9.demo.domain.enums.TipoFuncionario;
 import jakarta.persistence.*;
+import lombok.*;
 
+@Data
 @Entity
-@Table(name = "funcionarios")
+@Table(name = "Funcionario")
 public class Funcionario {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @Column(name = "cpf", nullable = false, length = 11)
+    private String cpf;
 
+    @Column(name = "nome", nullable = false, length = 100)
     private String nome;
 
+    @Column(name = "email", length = 100)
     private String email;
 
-    @Enumerated(EnumType.STRING)
-    private TipoFuncionario cargo;
-
+    @Column(name = "departamento", nullable = false, length = 45)
     private String departamento;
 
-    private boolean status;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "statusFunc", nullable = false)
+    private TipoFuncionario statusFunc;
 
-    // Construtores
-    public Funcionario() {
-    }
+    @ManyToOne
+    @JoinColumn(name = "protocolo_id_protocolo", nullable = false)
+    private Protocolo protocolo;
 
-    public Funcionario(String nome, String email, TipoFuncionario cargo, String departamento, boolean status) {
-        this.nome = nome;
-        this.email = email;
-        this.cargo = cargo;
-        this.departamento = departamento;
-        this.status = status;
-    }
-
-    // Getters e Setters
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public TipoFuncionario getCargo() {
-        return cargo;
-    }
-
-    public void setCargo(TipoFuncionario cargo) {
-        this.cargo = cargo;
-    }
-
-    public String getDepartamento() {
-        return departamento;
-    }
-
-    public void setDepartamento(String departamento) {
-        this.departamento = departamento;
-    }
-
-    public boolean isStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
-    }
+    @ManyToOne
+    @JoinColumn(name = "cargo_id_cargo", nullable = false)
+    private Cargo cargo;
 }
+

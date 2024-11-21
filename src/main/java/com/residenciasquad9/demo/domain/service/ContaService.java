@@ -2,13 +2,20 @@ package com.residenciasquad9.demo.domain.service;
 
 import com.residenciasquad9.demo.domain.dto.ContaDTO;
 import com.residenciasquad9.demo.domain.entites.Conta;
-import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-@Service
 public interface ContaService {
-    Conta save(ContaDTO conta);
-    Optional<Conta> findById(int id);
-}
 
+    // Salvar conta
+    Conta save(ContaDTO contaDTO);
+
+    // Buscar conta por ID
+    Optional<Conta> findById(int id);
+
+    // Buscar conta por CPF
+    Conta buscarContaPorCPF(String cpf);
+
+    // Buscar conta por agência e número de conta
+    Conta buscarContaPorAgenciaENumero(String agencia, String numeroConta);
+}

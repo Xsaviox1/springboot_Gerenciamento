@@ -8,14 +8,19 @@ import java.util.Optional;
 
 public interface DepartamentoService {
 
+    // Método para salvar um departamento
     Departamento save(DepartamentoDTO departamentoDTO);
 
+    // Método para encontrar um departamento por id
     Optional<Departamento> findById(Long id);
 
+    // Método para buscar todos os departamentos
     List<Departamento> findAll();
 
+    // Método para atualizar um departamento
     Departamento update(Long id, DepartamentoDTO departamentoDTO);
 
+    // Método para excluir um departamento pelo id
     void deleteById(Long id);
 }
 
