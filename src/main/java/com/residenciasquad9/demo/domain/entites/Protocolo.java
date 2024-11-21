@@ -50,9 +50,9 @@ public class Protocolo {
     public Object getHistorico() {
         return null;
     }
+    public void setFuncionario(Funcionario funcionario) {
 
-        public void setFuncionario(Funcionario funcionario) {
-        }
+    }
 }
 
 

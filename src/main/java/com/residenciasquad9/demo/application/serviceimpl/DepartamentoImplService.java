@@ -18,14 +18,11 @@ public class DepartamentoImplService implements DepartamentoService {
 
     @Override
     public Departamento save(DepartamentoDTO departamentoDTO) {
-        if (departamentoRepository.existsByNome(departamentoDTO.getNome())) {
-            throw new RuntimeException("Departamento com o nome '" + departamentoDTO.getNome() + "' já existe");
-        }
+        // Lógica para salvar departamento
         Departamento departamento = new Departamento();
         departamento.setNome(departamentoDTO.getNome());
         departamento.setDescricao(departamentoDTO.getDescricao());
         departamento.setTipoDepartamento(departamentoDTO.getTipoDepartamento());
-
         return departamentoRepository.save(departamento);
     }
 
@@ -41,18 +38,21 @@ public class DepartamentoImplService implements DepartamentoService {
 
     @Override
     public Departamento update(Long id, DepartamentoDTO departamentoDTO) {
-        Departamento departamento = departamentoRepository.findById(id).orElseThrow(() -> new RuntimeException("Departamento não encontrado"));
-
+        Departamento departamento = departamentoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Departamento não encontrado"));
         departamento.setNome(departamentoDTO.getNome());
         departamento.setDescricao(departamentoDTO.getDescricao());
         departamento.setTipoDepartamento(departamentoDTO.getTipoDepartamento());
-
         return departamentoRepository.save(departamento);
     }
 
     @Override
     public void deleteById(Long id) {
-        Departamento departamento = departamentoRepository.findById(id).orElseThrow(() -> new RuntimeException("Departamento não encontrado"));
-        departamentoRepository.delete(departamento);
+        departamentoRepository.deleteById(id);
+    }
+
+    @Override
+    public Optional<Departamento> findByNome(String nome) {
+        return departamentoRepository.findByNome(nome);  // Método no repositório
     }
 }

@@ -22,5 +22,8 @@ public interface DepartamentoService {
 
     // Método para excluir um departamento pelo id
     void deleteById(Long id);
+
+    // Método para encontrar um departamento por nome
+    Optional<Departamento> findByNome(String nome);
 }
 
