@@ -55,7 +55,12 @@ public class FuncionarioImplService implements FuncionarioService {
     public Funcionario atribuirDepartamentoAoFuncionario(String cpf, String departamento) {
         Funcionario funcionario = funcionarioRepository.findById(cpf).orElseThrow(() -> new RuntimeException("Funcionario não encontrado"));
         Departamento departamentoEntity = departamentoRepository.findByNome(departamento).orElseThrow(() -> new RuntimeException("Departamento não encontrado"));
-        funcionario.setDepartamento(departamentoEntity.getNome());
+        funcionario.setDepartamento(String.valueOf(departamentoEntity));  // Agora estamos setando o objeto completo
         return funcionarioRepository.save(funcionario);
+    }
+
+    @Override
+    public Funcionario findById(String cpf) {
+        return null;
     }
 }

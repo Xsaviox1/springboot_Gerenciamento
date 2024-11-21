@@ -28,8 +28,8 @@ public class ProtocoloController {
     private FuncionarioService funcionarioService;
 
     @PostMapping("/abrir")
-    public ResponseEntity<Protocolo> abrirProtocolo(@RequestBody ProtocoloDTO protocoloDTO, @RequestParam Long funcionarioId) {
-        Optional<Funcionario> funcionarioOpt = funcionarioService.findById(funcionarioId);
+    public ResponseEntity<Protocolo> abrirProtocolo(@RequestBody ProtocoloDTO protocoloDTO, @RequestParam String cpf) {
+        Optional<Funcionario> funcionarioOpt = Optional.ofNullable(funcionarioService.findById(cpf));
         if (funcionarioOpt.isPresent()) {
             Funcionario funcionario = funcionarioOpt.get();
             Protocolo protocolo = protocoloService.abrirProtocolo(protocoloDTO, funcionario);
@@ -58,7 +58,7 @@ public class ProtocoloController {
 
     @GetMapping("/{id}/historico")
     public ResponseEntity<List<String>> consultarHistoricoProtocolo(@PathVariable String id) {
-        List<String> historico = protocoloService.consultarHistoricoProtocolo(id);
+        List<String> historico = (List<String>) protocoloService.consultarHistoricoProtocolo(id);
         return historico != null ? ResponseEntity.ok(historico) : ResponseEntity.notFound().build();
     }
 }
