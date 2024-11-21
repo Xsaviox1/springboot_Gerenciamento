@@ -1,22 +1,18 @@
 package com.residenciasquad9.demo.application.serviceimpl;
-
 import com.residenciasquad9.demo.domain.entites.Titular;
 import com.residenciasquad9.demo.domain.repository.TitularRepository;
 import com.residenciasquad9.demo.domain.service.TitularService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
-public class TitularServiceImpl implements TitularService {
-
-    private final TitularRepository titularRepository;
+public class TitularImplService implements TitularService {
 
     @Autowired
-    public TitularServiceImpl(TitularRepository titularRepository) {
-        this.titularRepository = titularRepository;
-    }
+    private TitularRepository titularRepository;
 
     @Override
     public Titular save(Titular titular) {
@@ -38,3 +34,4 @@ public class TitularServiceImpl implements TitularService {
         titularRepository.deleteById(id);
     }
 }
+

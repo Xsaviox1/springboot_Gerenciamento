@@ -8,7 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "clientes")  // Ajuste na tabela, seguindo a convenção plural
+@Table(name = "clientes")
 public class Cliente {
 
     @Id
@@ -35,3 +35,4 @@ public class Cliente {
     @Column(name = "telefone_id_telefone")
     private Long telefoneIdTelefone;
 }
+

@@ -43,7 +43,18 @@ public class Protocolo {
         @ManyToOne
         @JoinColumn(name = "cliente_id_cliente", referencedColumnName = "id_cliente")
         private Cliente cliente;
+
+    public void setPrazo(Date date) {
+    }
+
+    public Object getHistorico() {
+        return null;
+    }
+
+        public void setFuncionario(Funcionario funcionario) {
+        }
 }
+
 
 
 

@@ -1,8 +1,8 @@
 package com.residenciasquad9.demo.application.controller;
 
-import com.residenciasquad9.demo.domain.dto.TitularDTO;
 import com.residenciasquad9.demo.domain.entites.Titular;
 import com.residenciasquad9.demo.domain.service.TitularService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,34 +13,31 @@ import java.util.Optional;
 @RequestMapping("/api/titulares")
 public class TitularController {
 
-    private final TitularService titularService;
-
     @Autowired
-    public TitularController(TitularService titularService) {
-        this.titularService = titularService;
-    }
+    private TitularService titularService;
 
-    // Criação de Titular
     @PostMapping
-    public ResponseEntity<Titular> createTitular(@RequestBody TitularDTO titularDTO) {
-        Titular titular = new Titular();
-        titular.setNome(titularDTO.getNome());
-        titular.setCpf(titularDTO.getCpf());
-        titular.setEmail(titularDTO.getEmail());
-        return ResponseEntity.ok(titularService.save(titular));
+    public ResponseEntity<Titular> salvarTitular(@RequestBody Titular titular) {
+        Titular salvo = titularService.save(titular);
+        return ResponseEntity.ok(salvo);
     }
 
-    // Busca por CPF de Titular
-    @GetMapping("/cpf/{cpf}")
-    public ResponseEntity<Titular> getTitularByCpf(@PathVariable String cpf) {
-        Optional<Titular> titular = titularService.findByCpf(cpf);
-        return titular.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    @GetMapping("/{cpf}")
+    public ResponseEntity<Titular> buscarTitularPorCpf(@PathVariable String cpf) {
+        Optional<Titular> titularOpt = titularService.findByCpf(cpf);
+        return titularOpt.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    // Excluir Titular
+    @GetMapping("/{id}")
+    public ResponseEntity<Titular> buscarTitularPorId(@PathVariable Long id) {
+        Optional<Titular> titularOpt = titularService.findById(id);
+        return titularOpt.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteTitular(@PathVariable Long id) {
+    public ResponseEntity<Void> deletarTitular(@PathVariable Long id) {
         titularService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
 }
+

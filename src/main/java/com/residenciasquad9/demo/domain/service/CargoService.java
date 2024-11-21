@@ -6,7 +6,10 @@ import com.residenciasquad9.demo.domain.dto.CargoDTO;
 import java.util.Optional;
 
 public interface CargoService {
+
+    // Método para salvar um cargo
     Cargo save(CargoDTO cargo);
 
-    Optional<Cargo> findById(Long id);  // Alterado para Long
+    // Método para buscar um cargo por id
+    Optional<Cargo> findById(Long id);  // O ID do cargo é Long, como esperado
 }

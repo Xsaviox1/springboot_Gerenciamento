@@ -1,5 +1,6 @@
 package com.residenciasquad9.demo.domain.dto;
 
+import com.residenciasquad9.demo.domain.entites.Cliente;
 import com.residenciasquad9.demo.domain.enums.Status;
 import com.residenciasquad9.demo.domain.enums.TipoProtocolo;
 import lombok.AllArgsConstructor;
@@ -20,6 +21,7 @@ public class ProtocoloDTO {
     private String descricao;              // Descrição do protocolo
     private TipoProtocolo tipoProtocolo;   // Tipo do protocolo (Enum)
     private Status status;                 // Status do protocolo (Enum)
-    private Long clienteIdCliente;         // ID do cliente associado ao protocolo
+    private Cliente cliente;               // Objeto Cliente ao invés do ID
 
 }
+
