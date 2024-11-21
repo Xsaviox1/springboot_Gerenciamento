@@ -1,40 +1,85 @@
 package com.residenciasquad9.demo.domain.entites;
 
-import com.residenciasquad9.demo.domain.enums.StatusFunc;
+import com.residenciasquad9.demo.enums.TipoFuncionario;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
-@Table(name = "Funcionario")
+@Table(name = "funcionarios")
 public class Funcionario {
 
     @Id
-    @Column(name = "codigo_funcional", length = 14)
-    private String codigoFuncional;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-    @Column(name = "nome", nullable = false, length = 100)
     private String nome;
 
-    @Column(name = "email", length = 100)
     private String email;
 
-    @Column(name = "departamento", nullable = false, length = 45)
+    @Enumerated(EnumType.STRING)
+    private TipoFuncionario cargo;
+
     private String departamento;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "status", nullable = false)
-    private StatusFunc status;
+    private boolean status;
 
-    @ManyToOne
-    @JoinColumn(name = "protocolo_id_protocolo", nullable = false)
-    private Protocolo protocolo;
+    // Construtores
+    public Funcionario() {
+    }
 
-    @ManyToOne
-    @JoinColumn(name = "cargo_id_cargo", nullable = false)
-    private Cargo cargo;
+    public Funcionario(String nome, String email, TipoFuncionario cargo, String departamento, boolean status) {
+        this.nome = nome;
+        this.email = email;
+        this.cargo = cargo;
+        this.departamento = departamento;
+        this.status = status;
+    }
+
+    // Getters e Setters
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public TipoFuncionario getCargo() {
+        return cargo;
+    }
+
+    public void setCargo(TipoFuncionario cargo) {
+        this.cargo = cargo;
+    }
+
+    public String getDepartamento() {
+        return departamento;
+    }
+
+    public void setDepartamento(String departamento) {
+        this.departamento = departamento;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
 }
