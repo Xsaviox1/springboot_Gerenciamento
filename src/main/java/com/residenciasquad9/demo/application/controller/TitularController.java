@@ -22,7 +22,7 @@ public class TitularController {
         return ResponseEntity.ok(salvo);
     }
 
-    @GetMapping("/{cpf}")
+    @GetMapping("/cpf/{cpf}")
     public ResponseEntity<Titular> buscarTitularPorCpf(@PathVariable String cpf) {
         Optional<Titular> titularOpt = titularService.findByCpf(cpf);
         return titularOpt.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());

@@ -45,7 +45,7 @@ public class ContaServiceImpl implements ContaService {
     @Override
     public Conta buscarContaPorCPF(String cpf) {
         // Busca a conta pelo CPF
-        return contaRepository.findByTitularCpf(cpf)
+        return contaRepository.findByCpf(cpf)
                 .orElseThrow(() -> new IllegalArgumentException("Conta não encontrada para o CPF: " + cpf));
     }
 

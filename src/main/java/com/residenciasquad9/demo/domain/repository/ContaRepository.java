@@ -7,6 +7,6 @@ import java.util.Optional;
 
 public interface ContaRepository extends JpaRepository<Conta, Integer> {
     boolean existsByCpf(String cpf);
-    Optional<Conta> findByTitularCpf(String cpf);
+    Optional<Conta> findByCpf(String cpf);
     Optional<Conta> findByAgenciaAndNumeroConta(String agencia, String numeroConta);
 }

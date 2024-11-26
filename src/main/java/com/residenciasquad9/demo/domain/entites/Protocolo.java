@@ -15,7 +15,7 @@ public class Protocolo {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         @Column(name = "id_protocolo")
-        private String idProtocolo;
+        private Long idProtocolo;
 
         @Column(name = "numero_protocolo", nullable = false, unique = true)
         private Long numeroProtocolo;
