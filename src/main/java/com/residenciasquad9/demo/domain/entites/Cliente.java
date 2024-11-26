@@ -33,6 +33,6 @@ public class Cliente {
     private String cnpj;
 
     @Column(name = "telefone_id_telefone")
-    private Long telefoneIdTelefone;
+    private String telefoneIdTelefone;
 }
 
